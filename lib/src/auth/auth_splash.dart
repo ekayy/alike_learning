@@ -1,3 +1,4 @@
+import 'package:alike_learning/src/core/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,21 +19,17 @@ class AuthSplash extends StatelessWidget {
                 Text('Tell your story and find love'),
               ],
             ),
-            Column(
+            Wrap(
+              runSpacing: 20,
               children: <Widget>[
-                RaisedButton(
-                  child: Text('Sign Up'),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                  onPressed: () {},
+                Button(
+                  text: 'Sign Up',
+                  onPress: () {},
                 ),
-                RaisedButton(
-                  child: Text('Login'),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                  onPressed: () {},
+                Button(
+                  secondary: true,
+                  text: 'Login',
+                  onPress: () {},
                 ),
               ],
             ),
