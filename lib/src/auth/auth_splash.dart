@@ -1,3 +1,4 @@
+import 'package:alike_learning/src/auth/auth_verify.dart';
 import 'package:alike_learning/src/core/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,12 @@ class AuthSplash extends StatelessWidget {
               children: <Widget>[
                 Button(
                   text: 'Sign Up',
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AuthVerify()),
+                    );
+                  },
                 ),
                 Button(
                   secondary: true,
