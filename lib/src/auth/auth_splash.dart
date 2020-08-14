@@ -20,8 +20,7 @@ class AuthSplash extends StatelessWidget {
                 Text('Tell your story and find love'),
               ],
             ),
-            Wrap(
-              runSpacing: 20,
+            Column(
               children: <Widget>[
                 Button(
                   text: 'Sign Up',
@@ -32,6 +31,7 @@ class AuthSplash extends StatelessWidget {
                     );
                   },
                 ),
+                SizedBox(height: 20),
                 Button(
                   secondary: true,
                   text: 'Login',
