@@ -15,74 +15,93 @@ class _AuthVerifyState extends State<AuthVerify> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = MaskedTextController(mask: '(000) 000-0000');
   final _pinController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   bool showPicker = false;
   bool showVerification = false;
   bool hasError = false;
+  String phoneNumber;
 
   List<String> countryCodes = ['US +1', 'UK +44', 'AUS +61'];
 
   Widget phoneInput() {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Color.fromRGBO(151, 151, 151, 1.0))),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              controller: _phoneIsoController,
-              readOnly: true,
-              showCursor: false,
-              textAlign: TextAlign.right,
-              decoration: InputDecoration(
-                hintText: 'US +1',
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                contentPadding:
-                    EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-              ),
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-              onTap: () {
-                setState(() => {showPicker = true});
-              },
-            ),
-          ),
-          Container(
-            width: 1,
-            height: 60,
-            color: Color.fromRGBO(151, 151, 151, 1.0),
-          ),
-          // ),
-          Expanded(
-            flex: 2,
-            child: TextFormField(
+    return Form(
+      key: _formKey,
+      child: Container(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
                 keyboardType: TextInputType.number,
-                controller: _phoneController,
+                controller: _phoneIsoController,
+                readOnly: true,
+                showCursor: false,
+                textAlign: TextAlign.right,
                 decoration: InputDecoration(
-                  hintText: '(510) 555-5555',
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
+                  hintText: 'US +1',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  // errorBorder: InputBorder.none,
                   contentPadding:
-                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                      EdgeInsets.only(left: 15, bottom: 15, top: 15, right: 15),
                 ),
-                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                 ),
                 onTap: () {
-                  setState(() => {showPicker = false});
-                }),
-          ),
-        ],
+                  setState(() => {showPicker = true});
+                },
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: _phoneController,
+                  decoration: InputDecoration(
+                    hintText: '(510) 555-5555',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    // errorBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 15, top: 15, right: 15),
+                  ),
+                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return 'Phone number is required.';
+                    }
+                    if (value.length < 10) {
+                      return 'Phone number too short.';
+                    }
+                    return null;
+                  },
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                  onTap: () {
+                    setState(() => {showPicker = false});
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -149,7 +168,17 @@ class _AuthVerifyState extends State<AuthVerify> {
                     ? (Button(
                         text: (!showVerification ? 'Send text' : 'Confirm'),
                         onPress: () {
-                          setState(() => showVerification = true);
+                          RegExp numberRegex = RegExp(r'[^0-9]');
+
+                          // get full phone number
+                          setState(() => phoneNumber =
+                              (_phoneIsoController.text + _phoneController.text)
+                                  .replaceAll(numberRegex, ''));
+
+                          // send SMS code and show PIN field
+                          if (_formKey.currentState.validate()) {
+                            setState(() => showVerification = true);
+                          }
                         }))
                     : (Button(
                         text: 'Confirm',
