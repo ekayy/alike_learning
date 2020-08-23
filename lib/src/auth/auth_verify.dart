@@ -52,7 +52,7 @@ class _AuthVerifyState extends State<AuthVerify> {
                   ),
                   // errorBorder: InputBorder.none,
                   contentPadding:
-                      EdgeInsets.only(left: 15, bottom: 15, top: 15, right: 15),
+                      EdgeInsets.only(left: 15, bottom: 20, top: 20, right: 15),
                 ),
                 style: TextStyle(
                   fontSize: 20.0,
@@ -81,7 +81,7 @@ class _AuthVerifyState extends State<AuthVerify> {
                     ),
                     // errorBorder: InputBorder.none,
                     contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 15, top: 15, right: 15),
+                        left: 15, bottom: 20, top: 20, right: 15),
                   ),
                   inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                   validator: (String value) {
@@ -159,11 +159,20 @@ class _AuthVerifyState extends State<AuthVerify> {
             Column(
               children: [
                 SizedBox(height: 40),
-                Text('Let\'s get started'),
-                Text('enter your phone number'),
-                SizedBox(height: 60),
+                Text('Let\'s get started',
+                    style: TextStyle(
+                      fontSize: 26,
+                    )),
+                SizedBox(height: 10),
+                Text(
+                  'enter your phone number',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 50),
                 (!showVerification ? (phoneInput()) : pinInput()),
-                SizedBox(height: 60),
+                SizedBox(height: 50),
                 (!showVerification
                     ? (Button(
                         text: (!showVerification ? 'Send text' : 'Confirm'),
@@ -189,9 +198,15 @@ class _AuthVerifyState extends State<AuthVerify> {
                                 builder: (context) => AuthCreateAccount()),
                           );
                         }))),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 (!showVerification
-                    ? Text('Receive phone call instead')
+                    ? Text(
+                        'Receive phone call instead',
+                        style: TextStyle(
+                          color: Color(0xFF262854),
+                          fontSize: 18,
+                        ),
+                      )
                     : Text('Try another option')),
               ],
             ),
