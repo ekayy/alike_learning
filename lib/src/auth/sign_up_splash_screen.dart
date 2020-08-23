@@ -1,9 +1,8 @@
-import 'package:alike_learning/src/auth/auth_verify.dart';
-import 'package:alike_learning/src/core/button.dart';
+import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AuthSplash extends StatelessWidget {
+class SignUpSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +16,9 @@ class AuthSplash extends StatelessWidget {
                   CupertinoIcons.heart,
                 ),
                 Text('alike'),
-                Text('Tell your story and find love'),
+                SizedBox(height: 10),
+                Text('Tell your story and find love',
+                    style: TextStyle(fontSize: 20)),
               ],
             ),
             Column(
@@ -25,10 +26,7 @@ class AuthSplash extends StatelessWidget {
                 Button(
                   text: 'Sign Up',
                   onPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AuthVerify()),
-                    );
+                    Navigator.pushNamed(context, '/signUpPhone');
                   },
                 ),
                 SizedBox(height: 20),

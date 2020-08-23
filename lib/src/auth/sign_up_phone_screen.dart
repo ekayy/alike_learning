@@ -1,17 +1,17 @@
-import 'package:alike_learning/src/auth/auth_create_account.dart';
+import 'package:alike_learning/src/auth/sign_up_email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:alike_learning/src/core/button.dart';
+import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-class AuthVerify extends StatefulWidget {
+class SignUpPhoneScreen extends StatefulWidget {
   @override
-  _AuthVerifyState createState() => _AuthVerifyState();
+  _SignUpPhoneScreenState createState() => _SignUpPhoneScreenState();
 }
 
-class _AuthVerifyState extends State<AuthVerify> {
+class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = MaskedTextController(mask: '(000) 000-0000');
   final _pinController = TextEditingController();
@@ -28,6 +28,7 @@ class _AuthVerifyState extends State<AuthVerify> {
     return Form(
       key: _formKey,
       child: Container(
+        height: 90,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -109,11 +110,12 @@ class _AuthVerifyState extends State<AuthVerify> {
   Widget pinInput() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 64,
       decoration: BoxDecoration(
           border: Border.all(color: Color.fromRGBO(151, 151, 151, 1.0))),
       child: Center(
         child: PinCodeTextField(
+          pinBoxOuterPadding:
+              EdgeInsets.only(left: 15, bottom: 15, top: 15, right: 15),
           autofocus: true,
           controller: _pinController,
           highlight: true,
