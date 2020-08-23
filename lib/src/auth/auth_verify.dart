@@ -2,7 +2,9 @@ import 'package:alike_learning/src/auth/auth_create_account.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/core/button.dart';
+import 'package:flutter/services.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class AuthVerify extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class AuthVerify extends StatefulWidget {
 
 class _AuthVerifyState extends State<AuthVerify> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
-  final _phoneController = TextEditingController();
+  final _phoneController = MaskedTextController(mask: '(000) 000-0000');
   final _pinController = TextEditingController();
 
   bool showPicker = false;
@@ -55,7 +57,6 @@ class _AuthVerifyState extends State<AuthVerify> {
             width: 1,
             height: 60,
             color: Color.fromRGBO(151, 151, 151, 1.0),
-            // constraints: BoxConstraints.expand(),
           ),
           // ),
           Expanded(
@@ -73,6 +74,7 @@ class _AuthVerifyState extends State<AuthVerify> {
                   contentPadding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                 ),
+                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                 style: TextStyle(
                   fontSize: 18.0,
                 ),
