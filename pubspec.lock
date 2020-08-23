@@ -88,13 +88,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  pin_code_fields:
+  pin_code_text_field:
     dependency: "direct main"
     description:
-      name: pin_code_fields
+      name: pin_code_text_field
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "1.7.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -158,4 +158,3 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.9.0-14.0.dev <3.0.0"
-  flutter: ">=1.20.0 <2.0.0"
