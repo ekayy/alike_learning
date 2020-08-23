@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "878292195565",
+    "firebase_url": "https://alikelearning.firebaseio.com",
+    "project_id": "alikelearning",
+    "storage_bucket": "alikelearning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878292195565:android:a6026c667ec1d998c454e4",
+        "android_client_info": {
+          "package_name": "com.example.alike_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878292195565-383btqgoa3dplcsieq8iiqvsaggk3ni1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEnH82QqqItgoKWbE9MmcDxMx6xy01g70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878292195565-383btqgoa3dplcsieq8iiqvsaggk3ni1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
