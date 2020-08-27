@@ -15,9 +15,9 @@ class SignUpSplashScreen extends StatelessWidget {
               children: <Widget>[
                 SvgPicture.asset('assets/icons/logo.svg',
                     semanticsLabel: 'Alike logo'),
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Text('Tell your story and find love',
-                    style: TextStyle(fontSize: 20)),
+                    style: const TextStyle(fontSize: 20)),
               ],
             ),
             Column(
@@ -28,7 +28,7 @@ class SignUpSplashScreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/signUpPhone');
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Button(
                   secondary: true,
                   text: 'Login',

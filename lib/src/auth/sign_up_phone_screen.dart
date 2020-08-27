@@ -1,4 +1,3 @@
-import 'package:alike_learning/src/auth/sign_up_email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/common/button.dart';
@@ -15,7 +14,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = MaskedTextController(mask: '(000) 000-0000');
   final _pinController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _phoneFormKey = GlobalKey<FormState>();
 
   bool showPicker = false;
   bool showVerification = false;
@@ -26,7 +25,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
 
   Widget phoneInput() {
     return Form(
-      key: _formKey,
+      key: _phoneFormKey,
       child: Container(
         height: 90,
         child: Row(
@@ -42,20 +41,19 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                 decoration: InputDecoration(
                   hintText: 'US +1',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                         width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
                     borderRadius: BorderRadius.zero,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                         width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
                     borderRadius: BorderRadius.zero,
                   ),
-                  // errorBorder: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.only(left: 15, bottom: 20, top: 20, right: 15),
+                  contentPadding: const EdgeInsets.only(
+                      left: 15, bottom: 20, top: 20, right: 15),
                 ),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                 ),
                 onTap: () {
@@ -71,17 +69,17 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                   decoration: InputDecoration(
                     hintText: '(510) 555-5555',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                           width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
                       borderRadius: BorderRadius.zero,
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                           width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
                       borderRadius: BorderRadius.zero,
                     ),
                     // errorBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
+                    contentPadding: const EdgeInsets.only(
                         left: 15, bottom: 20, top: 20, right: 15),
                   ),
                   inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
@@ -94,7 +92,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                     }
                     return null;
                   },
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),
                   onTap: () {
@@ -108,45 +106,56 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   }
 
   Widget pinInput() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          border: Border.all(color: Color.fromRGBO(151, 151, 151, 1.0))),
-      child: Center(
-        child: PinCodeTextField(
-          pinBoxOuterPadding:
-              EdgeInsets.only(left: 15, bottom: 15, top: 15, right: 15),
-          autofocus: true,
-          controller: _pinController,
-          highlight: true,
-          pinBoxColor: Colors.grey[200],
-          highlightPinBoxColor: Colors.grey[300],
-          highlightColor: Colors.transparent,
-          defaultBorderColor: Colors.transparent,
-          hasTextBorderColor: Colors.transparent,
-          maxLength: 4,
-          hasError: hasError,
-          onTextChanged: (text) {
-            setState(() {
-              hasError = false;
-            });
-          },
-          onDone: (text) {
-            print("DONE $text");
-            print("DONE CONTROLLER ${_pinController.text}");
-          },
-          pinBoxWidth: 40,
-          pinBoxHeight: 40,
-          pinBoxRadius: 40,
-          wrapAlignment: WrapAlignment.spaceAround,
-          pinBoxDecoration: ProvidedPinBoxDecoration.defaultPinBoxDecoration,
-          pinTextStyle: TextStyle(fontSize: 18.0),
-          pinTextAnimatedSwitcherTransition:
-              ProvidedPinBoxTextAnimation.scalingTransition,
-          pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
-          keyboardType: TextInputType.number,
+    return Column(
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              border: Border.all(color: Color.fromRGBO(151, 151, 151, 1.0))),
+          child: Center(
+            child: PinCodeTextField(
+              pinBoxOuterPadding: const EdgeInsets.only(
+                  left: 15, bottom: 15, top: 15, right: 15),
+              autofocus: true,
+              controller: _pinController,
+              highlight: true,
+              pinBoxColor: Colors.grey[200],
+              highlightPinBoxColor: Colors.grey[300],
+              highlightColor: Colors.transparent,
+              defaultBorderColor: Colors.transparent,
+              hasTextBorderColor: Colors.transparent,
+              maxLength: 4,
+              hasError: hasError,
+              onTextChanged: (text) {
+                setState(() {
+                  hasError = true;
+                });
+              },
+              onDone: (text) {
+                print("DONE $text");
+                print("DONE CONTROLLER ${_pinController.text}");
+              },
+              pinBoxWidth: 40,
+              pinBoxHeight: 40,
+              pinBoxRadius: 40,
+              wrapAlignment: WrapAlignment.spaceAround,
+              pinBoxDecoration:
+                  ProvidedPinBoxDecoration.defaultPinBoxDecoration,
+              pinTextStyle: TextStyle(fontSize: 18.0),
+              pinTextAnimatedSwitcherTransition:
+                  ProvidedPinBoxTextAnimation.scalingTransition,
+              pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
+              keyboardType: TextInputType.number,
+            ),
+          ),
         ),
-      ),
+        Visibility(
+          child: Text(
+            "Wrong PIN!",
+          ),
+          visible: hasError,
+        ),
+      ],
     );
   }
 
@@ -160,21 +169,21 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
           children: <Widget>[
             Column(
               children: [
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Text('Let\'s get started',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 26,
                     )),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   'enter your phone number',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 (!showVerification ? (phoneInput()) : pinInput()),
-                SizedBox(height: 50),
+                const SizedBox(height: 40),
                 (!showVerification
                     ? (Button(
                         text: (!showVerification ? 'Send text' : 'Confirm'),
@@ -187,24 +196,21 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                                   .replaceAll(numberRegex, ''));
 
                           // send SMS code and show PIN field
-                          if (_formKey.currentState.validate()) {
+                          if (_phoneFormKey.currentState.validate()) {
                             setState(() => showVerification = true);
                           }
                         }))
                     : (Button(
                         text: 'Confirm',
                         onPress: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AuthCreateAccount()),
-                          );
+                          // Need to show error if pin invalid
+                          Navigator.pushNamed(context, '/signUpEmail');
                         }))),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 (!showVerification
                     ? Text(
                         'Receive phone call instead',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF262854),
                           fontSize: 18,
                         ),
