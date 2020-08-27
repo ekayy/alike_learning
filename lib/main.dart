@@ -1,3 +1,4 @@
+import 'package:alike_learning/src/auth/sign_up_email_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_phone_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/': (context) => SignUpSplashScreen(),
         '/signUpPhone': (context) => SignUpPhoneScreen(),
+        '/signUpEmail': (context) => SignUpEmailScreen(),
       },
     );
   }
