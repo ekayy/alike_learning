@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>878292195565-a4ts23g87dqsmi8snlogk8qc7gsgeua6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.878292195565-a4ts23g87dqsmi8snlogk8qc7gsgeua6</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>878292195565-mr1moobsfl6onpsi7ueb1kc60f3i7d3j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAzFhWi4EXKS6i91tPgqAR-qaFuxUR36EY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>878292195565</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.alike.flutterflies</string>
+	<key>PROJECT_ID</key>
+	<string>alikelearning</string>
+	<key>STORAGE_BUCKET</key>
+	<string>alikelearning.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:878292195565:ios:840733600d33b6bcc454e4</string>
+	<key>DATABASE_URL</key>
+	<string>https://alikelearning.firebaseio.com</string>
+</dict>
+</plist>
