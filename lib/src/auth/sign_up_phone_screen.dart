@@ -1,3 +1,5 @@
+import 'package:alike_learning/src/auth/input/country_code_input.dart';
+import 'package:alike_learning/src/auth/input/phone_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/common/button.dart';
@@ -31,73 +33,25 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                controller: _phoneIsoController,
-                readOnly: true,
-                showCursor: false,
-                textAlign: TextAlign.right,
-                decoration: InputDecoration(
-                  hintText: 'US +1',
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
-                    borderRadius: BorderRadius.zero,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
-                    borderRadius: BorderRadius.zero,
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      left: 15, bottom: 20, top: 20, right: 15),
-                ),
-                style: const TextStyle(
-                  fontSize: 20.0,
-                ),
-                onTap: () {
-                  setState(() => {showPicker = true});
-                },
-              ),
+            CountryCodeInput(
+              controller: _phoneIsoController,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.right,
+              onPress: () {
+                setState(() => {showPicker = true});
+              },
             ),
-            Expanded(
-              flex: 2,
-              child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: _phoneController,
-                  decoration: InputDecoration(
-                    hintText: '(510) 555-5555',
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
-                      borderRadius: BorderRadius.zero,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromRGBO(151, 151, 151, 1.0)),
-                      borderRadius: BorderRadius.zero,
-                    ),
-                    // errorBorder: InputBorder.none,
-                    contentPadding: const EdgeInsets.only(
-                        left: 15, bottom: 20, top: 20, right: 15),
-                  ),
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return 'Phone number is required.';
-                    }
-                    if (value.length < 10) {
-                      return 'Phone number too short.';
-                    }
-                    return null;
-                  },
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
-                  onTap: () {
-                    setState(() => {showPicker = false});
-                  }),
+            Container(
+              height: 65,
+              width: 1,
+              color: const Color(0xFF979797),
+            ),
+            PhoneInput(
+              controller: _phoneController,
+              keyboardType: TextInputType.number,
+              onPress: () {
+                setState(() => {showPicker = false});
+              },
             ),
           ],
         ),
@@ -164,8 +118,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: ListView(
           children: <Widget>[
             Column(
               children: [
@@ -246,6 +199,8 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
 
   @override
   void dispose() {
+    _phoneIsoController?.dispose();
+    _phoneController?.dispose();
     _pinController?.dispose();
     super.dispose();
   }
