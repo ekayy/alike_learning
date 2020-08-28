@@ -94,7 +94,20 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 50),
+                (!showVerification
+                    ? const SizedBox(height: 40)
+                    : Column(
+                        children: <Widget>[
+                          const SizedBox(height: 10),
+                          Text(
+                            '${_phoneIsoController.text} ${_phoneController.text}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                        ],
+                      )),
                 (!showVerification ? (phoneInput()) : pinInput()),
                 const SizedBox(height: 40),
                 (!showVerification
