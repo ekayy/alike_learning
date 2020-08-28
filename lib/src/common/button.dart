@@ -13,7 +13,13 @@ class Button extends StatelessWidget {
       width: 280,
       height: 50,
       child: FlatButton(
-        child: Text(text),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            letterSpacing: 0.45,
+          ),
+        ),
         shape: RoundedRectangleBorder(
           side: BorderSide(
               color: Color(0xFF262854), width: 1, style: BorderStyle.solid),
