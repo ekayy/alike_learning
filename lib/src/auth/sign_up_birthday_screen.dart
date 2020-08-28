@@ -1,12 +1,17 @@
 import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
-class SignUpBirthdayScreen extends StatelessWidget {
+class SignUpBirthdayScreen extends StatefulWidget {
+  @override
+  _SignUpBirthdayScreenState createState() => _SignUpBirthdayScreenState();
+}
+
+class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
   final _dateController = TextEditingController();
 
-  // bool showPicker = false;
+  bool showPicker = false;
 
   @override
   Widget build(BuildContext context) {
@@ -14,53 +19,55 @@ class SignUpBirthdayScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(height: 40),
-            Text('Your birthday', style: TextStyle(fontSize: 25)),
-            SizedBox(height: 40),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              child: TextFormField(
-                controller: _dateController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: 'MM  /  DD  /  YYYY',
+            Column(
+              children: <Widget>[
+                const SizedBox(height: 40),
+                Text('Your birthday', style: TextStyle(fontSize: 25)),
+                const SizedBox(height: 40),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: TextFormField(
+                    controller: _dateController,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      hintText: 'MM  /  DD  /  YYYY',
+                    ),
+                    readOnly: true,
+                    showCursor: false,
+                    style: TextStyle(fontSize: 20.0, color: Colors.black),
+                    onTap: () async {
+                      setState(() => showPicker = true);
+                    },
+                  ),
                 ),
-                keyboardType: TextInputType.number,
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
-                onTap: () async {
-                  // DateTime date = DateTime(1900);
-                  // FocusScope.of(context).requestFocus(new FocusNode());
-
-                  // date = await showDatePicker(
-                  //     context: context,
-                  //     initialDate: DateTime.now(),
-                  //     firstDate: DateTime(1900),
-                  //     lastDate: DateTime(2100));
-
-                  // _dateController.text =
-                  // DateFormat('MM  /  dd  /  yyyy').format(date);
-                },
+                const SizedBox(height: 10),
+                Text('This cannot be changed later'),
+                const SizedBox(height: 30),
+                Button(
+                  text: 'Next',
+                  onPress: () {
+                    Navigator.pushNamed(context, '/signUpGender');
+                  },
+                ),
+              ],
+            ),
+            if (showPicker)
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  height: 200,
+                  child: CupertinoDatePicker(
+                    mode: CupertinoDatePickerMode.date,
+                    onDateTimeChanged: (DateTime date) {
+                      _dateController.text =
+                          DateFormat('MM  /  dd  /  yyyy').format(date);
+                    },
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text('This cannot be changed later'),
-            SizedBox(height: 30),
-            Button(
-              text: 'Next',
-              onPress: () {
-                Navigator.pushNamed(context, '/signUpGender');
-              },
-            ),
-            // if (showPicker)
-            //   Positioned(
-            //     bottom: 0,
-            //     child: Container(
-            //       height: 200,
-            //       // child: CupertinoDatePicker(),
-            //     ),
-            //   ),
           ],
         ),
       ),
