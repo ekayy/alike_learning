@@ -1,4 +1,7 @@
+import 'package:alike_learning/src/auth/sign_up_birthday_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_email_screen.dart';
+import 'package:alike_learning/src/auth/sign_up_gender_screen.dart';
+import 'package:alike_learning/src/auth/sign_up_name_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_phone_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +39,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => SignUpSplashScreen(),
         '/signUpPhone': (context) => SignUpPhoneScreen(),
         '/signUpEmail': (context) => SignUpEmailScreen(),
+        '/signUpName': (context) => SignUpNameScreen(),
+        '/signUpBirthday': (context) => SignUpBirthdayScreen(),
+        '/signUpGender': (context) => SignUpGenderScreen(),
       },
     );
   }
