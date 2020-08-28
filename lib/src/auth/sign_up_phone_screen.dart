@@ -83,7 +83,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                 Text(
                   'enter your phone number',
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
                 const SizedBox(height: 50),
@@ -117,7 +117,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                         'Receive phone call instead',
                         style: const TextStyle(
                           color: Color(0xFF262854),
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       )
                     : Text('Try another option')),

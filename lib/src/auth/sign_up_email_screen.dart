@@ -41,7 +41,7 @@ class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
             Button(
               text: 'Next',
               onPress: () {

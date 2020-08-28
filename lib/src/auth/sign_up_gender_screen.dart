@@ -37,13 +37,14 @@ class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
       appBar: AppBar(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Column(
               children: <Widget>[
                 Text('I am a', style: TextStyle(fontSize: 32)),
                 const SizedBox(height: 25),
                 ..._buildButtons(),
+                const SizedBox(height: 120),
               ],
             ),
             Button(

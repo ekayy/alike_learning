@@ -25,7 +25,7 @@ class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                const SizedBox(height: 40),
+                const SizedBox(height: 60),
                 Text(
                   'Your birthday',
                   style:

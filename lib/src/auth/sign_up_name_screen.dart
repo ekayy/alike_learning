@@ -20,7 +20,7 @@ class SignUpNameScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 28, color: Color(0xFF1B1B1B)),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             Form(
               key: _nameFormKey,
               child: AlikeTextInput(
