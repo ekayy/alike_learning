@@ -21,19 +21,19 @@ class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
             Column(
               children: <Widget>[
                 Text('I am a', style: TextStyle(fontSize: 32)),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Button(
                   secondary: true,
                   text: 'Woman',
                   onPress: () {},
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Button(
                   secondary: true,
                   text: 'Man',
                   onPress: () {},
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Button(
                   secondary: true,
                   text: 'Non-binary',
@@ -42,7 +42,7 @@ class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
               ],
             ),
             Button(
-              text: 'Non-binary',
+              text: 'Next',
               onPress: () {},
             ),
           ],

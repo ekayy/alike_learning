@@ -44,7 +44,10 @@ class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text('This cannot be changed later'),
+                Text(
+                  'This cannot be changed later',
+                  style: TextStyle(fontWeight: FontWeight.w200),
+                ),
                 const SizedBox(height: 30),
                 Button(
                   text: 'Next',

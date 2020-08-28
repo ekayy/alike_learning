@@ -9,24 +9,23 @@ class SignUpNameScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Text('Your name', style: TextStyle(fontSize: 25)),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20),
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Name',
-                  // border: InputBorder(borderSide: BorderSide.none),
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            Text('This cannot be changed later'),
-            SizedBox(height: 30),
+            const SizedBox(height: 10),
+            Text('This cannot be changed later',
+                style: TextStyle(fontWeight: FontWeight.w200)),
+            const SizedBox(height: 30),
             Button(
               text: 'Next',
               onPress: () {

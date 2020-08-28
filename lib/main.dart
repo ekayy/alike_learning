@@ -5,6 +5,7 @@ import 'package:alike_learning/src/auth/sign_up_name_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_phone_screen.dart';
 import 'package:alike_learning/src/auth/sign_up_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
           elevation: 0.0,
+        ),
+        textTheme: GoogleFonts.nunitoSansTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
       routes: <String, WidgetBuilder>{
