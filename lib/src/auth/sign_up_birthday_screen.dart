@@ -1,3 +1,4 @@
+import 'package:alike_learning/src/common/alike_text_input.dart';
 import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class SignUpBirthdayScreen extends StatefulWidget {
 }
 
 class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
+  final _birthdayFormKey = GlobalKey<FormState>();
   final _dateController = TextEditingController();
 
   bool showPicker = false;
@@ -24,31 +26,39 @@ class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
             Column(
               children: <Widget>[
                 const SizedBox(height: 40),
-                Text('Your birthday', style: TextStyle(fontSize: 25)),
+                Text(
+                  'Your birthday',
+                  style:
+                      const TextStyle(fontSize: 28, color: Color(0xFF1B1B1B)),
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 40),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20),
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: TextFormField(
-                    controller: _dateController,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
+                Form(
+                  key: _birthdayFormKey,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: AlikeTextInput(
+                      controller: _dateController,
+                      textAlign: TextAlign.center,
                       hintText: 'MM  /  DD  /  YYYY',
+                      readOnly: true,
+                      showCursor: false,
+                      onTap: () {
+                        setState(() => showPicker = true);
+                      },
                     ),
-                    readOnly: true,
-                    showCursor: false,
-                    style: TextStyle(fontSize: 20.0, color: Colors.black),
-                    onTap: () async {
-                      setState(() => showPicker = true);
-                    },
                   ),
                 ),
-                const SizedBox(height: 10),
                 Text(
                   'This cannot be changed later',
-                  style: TextStyle(fontWeight: FontWeight.w200),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 12,
+                    color: Color(0xFF1B1B1B),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
                 Button(
                   text: 'Next',
                   onPress: () {

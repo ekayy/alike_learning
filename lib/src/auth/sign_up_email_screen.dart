@@ -1,3 +1,4 @@
+import 'package:alike_learning/src/common/alike_text_input.dart';
 import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,33 +18,30 @@ class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50),
           children: <Widget>[
-            const SizedBox(height: 40),
-            Text('Create your account', style: TextStyle(fontSize: 25)),
-            const SizedBox(height: 40),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              child: TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                ),
-                autocorrect: false,
-                autovalidate: true,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Email address is required.';
-                  }
-                  if (!EmailValidator.validate(_emailController.text)) {
-                    return 'Email address is invalid.';
-                  }
-                  return null;
-                },
-              ),
+            Text(
+              'Create your account',
+              style: const TextStyle(fontSize: 28, color: Color(0xFF1B1B1B)),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 50),
+            AlikeTextInput(
+              controller: _emailController,
+              hintText: 'Email',
+              autocorrect: false,
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return 'Email address is required.';
+                }
+                if (!EmailValidator.validate(_emailController.text)) {
+                  return 'Email address is invalid.';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 50),
             Button(
               text: 'Next',
               onPress: () {
