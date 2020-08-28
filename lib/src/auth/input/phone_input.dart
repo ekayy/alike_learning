@@ -33,6 +33,7 @@ class PhoneInput extends StatelessWidget {
         child: TextFormField(
           keyboardType: keyboardType,
           controller: controller,
+          autofocus: true,
           decoration: InputDecoration(
             hintText: '(510) 555-5555',
             focusedBorder: const UnderlineInputBorder(

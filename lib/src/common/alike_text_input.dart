@@ -37,6 +37,7 @@ class AlikeTextInput extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         textCapitalization: textCapitalization,
+        autofocus: true,
         inputFormatters: inputFormatters,
         validator: validator,
         autocorrect: autocorrect,
