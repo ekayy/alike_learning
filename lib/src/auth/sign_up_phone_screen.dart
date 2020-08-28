@@ -1,5 +1,6 @@
 import 'package:alike_learning/src/auth/input/country_code_input.dart';
 import 'package:alike_learning/src/auth/input/phone_input.dart';
+import 'package:alike_learning/src/auth/input/pin_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/common/button.dart';
@@ -58,7 +59,10 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   }
 
   Widget pinInput() {
-    return 
+    return PinInput(
+      controller: _pinController,
+      hasError: hasError,
+    );
   }
 
   @override
