@@ -42,7 +42,7 @@ class PhoneInput extends StatelessWidget {
               ),
             ),
             contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 20, top: 20, right: 15),
+                const EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
           ),
           inputFormatters: [
             MaskedInputFormater('(###) ###-####'),
@@ -57,7 +57,7 @@ class PhoneInput extends StatelessWidget {
             return null;
           },
           style: const TextStyle(
-            fontSize: 20.0,
+            fontSize: 22.0,
           ),
           onTap: this.onPress,
         ),

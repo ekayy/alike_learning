@@ -38,10 +38,10 @@ class CountryCodeInput extends StatelessWidget {
               ),
             ),
             contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 20, top: 20, right: 15),
+                const EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
           ),
           style: const TextStyle(
-            fontSize: 20.0,
+            fontSize: 22.0,
           ),
           onTap: this.onPress,
         ),

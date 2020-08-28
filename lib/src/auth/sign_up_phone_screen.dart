@@ -20,6 +20,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   bool showPicker = false;
   bool showVerification = false;
   bool hasError = false;
+  bool pinEntered = false;
   String phoneNumber;
 
   List<String> countryCodes = ['US +1', 'UK +44', 'AUS +61'];
@@ -41,7 +42,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
               },
             ),
             Container(
-              height: 65,
+              height: 63,
               width: 1,
               color: const Color(0xFF979797),
             ),
@@ -60,9 +61,11 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
 
   Widget pinInput() {
     return PinInput(
-      controller: _pinController,
-      hasError: hasError,
-    );
+        controller: _pinController,
+        hasError: hasError,
+        onDone: (text) {
+          setState(() => pinEntered = true);
+        });
   }
 
   @override
@@ -75,13 +78,18 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
             Column(
               children: [
                 const SizedBox(height: 40),
-                Text('Let\'s get started',
+                Text(
+                    (!showVerification
+                        ? 'Let\'s get started'
+                        : 'Check your phone'),
                     style: const TextStyle(
                       fontSize: 26,
                     )),
                 const SizedBox(height: 10),
                 Text(
-                  'enter your phone number',
+                  (!showVerification
+                      ? 'enter your phone number'
+                      : 'A four digit code was sent to'),
                   style: const TextStyle(
                     fontSize: 16,
                   ),
@@ -107,20 +115,27 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
                         }))
                     : (Button(
                         text: 'Confirm',
+                        isButtonDisabled: !pinEntered,
                         onPress: () {
                           // Need to show error if pin invalid
                           Navigator.pushNamed(context, '/signUpEmail');
                         }))),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 (!showVerification
                     ? Text(
                         'Receive phone call instead',
                         style: const TextStyle(
                           color: Color(0xFF262854),
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                       )
-                    : Text('Try another option')),
+                    : Text(
+                        'Try another option',
+                        style: const TextStyle(
+                          color: Color(0xFF262854),
+                          fontSize: 18,
+                        ),
+                      )),
               ],
             ),
             if (showPicker)

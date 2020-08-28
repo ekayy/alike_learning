@@ -5,10 +5,12 @@ import 'package:pin_code_text_field/pin_code_text_field.dart';
 class PinInput extends StatelessWidget {
   final bool hasError;
   final TextEditingController controller;
+  final Function(String text) onDone;
 
   const PinInput({
     Key key,
     this.hasError,
+    this.onDone,
     @required this.controller,
   }) : super(key: key);
 
@@ -27,8 +29,8 @@ class PinInput extends StatelessWidget {
           ),
           child: Center(
             child: PinCodeTextField(
-              pinBoxOuterPadding: const EdgeInsets.only(
-                  left: 15, bottom: 15, top: 15, right: 15),
+              pinBoxOuterPadding:
+                  const EdgeInsets.only(left: 5, bottom: 11, top: 11, right: 5),
               autofocus: true,
               controller: controller,
               highlight: true,
@@ -40,9 +42,7 @@ class PinInput extends StatelessWidget {
               maxLength: 4,
               hasError: hasError,
               onTextChanged: (text) {},
-              onDone: (text) {
-                print("DONE $text");
-              },
+              onDone: this.onDone,
               pinBoxWidth: 40,
               pinBoxHeight: 40,
               pinBoxRadius: 40,

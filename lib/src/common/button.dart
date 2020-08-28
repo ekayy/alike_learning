@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  Button({@required this.text, this.secondary = false, @required this.onPress});
-
   final String text;
   final bool secondary;
   final Function onPress;
+  final bool isButtonDisabled;
+
+  const Button({
+    Key key,
+    @required this.text,
+    @required this.onPress,
+    this.isButtonDisabled = false,
+    this.secondary = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class Button extends StatelessWidget {
         ),
         color: secondary ? Colors.white : Color(0xFF262854),
         textColor: secondary ? Colors.black : Colors.white,
-        onPressed: this.onPress,
+        onPressed: isButtonDisabled ? null : this.onPress,
       ),
     );
   }
