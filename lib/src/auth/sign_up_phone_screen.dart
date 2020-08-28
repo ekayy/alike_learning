@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/services.dart';
-import 'package:pin_code_text_field/pin_code_text_field.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class SignUpPhoneScreen extends StatefulWidget {
   @override
@@ -14,7 +12,7 @@ class SignUpPhoneScreen extends StatefulWidget {
 
 class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
-  final _phoneController = MaskedTextController(mask: '(000) 000-0000');
+  final _phoneController = TextEditingController();
   final _pinController = TextEditingController();
   final _phoneFormKey = GlobalKey<FormState>();
 
@@ -48,7 +46,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
             ),
             PhoneInput(
               controller: _phoneController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.phone,
               onPress: () {
                 setState(() => {showPicker = false});
               },
@@ -60,57 +58,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   }
 
   Widget pinInput() {
-    return Column(
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              border: Border.all(color: Color.fromRGBO(151, 151, 151, 1.0))),
-          child: Center(
-            child: PinCodeTextField(
-              pinBoxOuterPadding: const EdgeInsets.only(
-                  left: 15, bottom: 15, top: 15, right: 15),
-              autofocus: true,
-              controller: _pinController,
-              highlight: true,
-              pinBoxColor: Colors.grey[200],
-              highlightPinBoxColor: Colors.grey[300],
-              highlightColor: Colors.transparent,
-              defaultBorderColor: Colors.transparent,
-              hasTextBorderColor: Colors.transparent,
-              maxLength: 4,
-              hasError: hasError,
-              onTextChanged: (text) {
-                setState(() {
-                  hasError = true;
-                });
-              },
-              onDone: (text) {
-                print("DONE $text");
-                print("DONE CONTROLLER ${_pinController.text}");
-              },
-              pinBoxWidth: 40,
-              pinBoxHeight: 40,
-              pinBoxRadius: 40,
-              wrapAlignment: WrapAlignment.spaceAround,
-              pinBoxDecoration:
-                  ProvidedPinBoxDecoration.defaultPinBoxDecoration,
-              pinTextStyle: TextStyle(fontSize: 18.0),
-              pinTextAnimatedSwitcherTransition:
-                  ProvidedPinBoxTextAnimation.scalingTransition,
-              pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
-              keyboardType: TextInputType.number,
-            ),
-          ),
-        ),
-        Visibility(
-          child: Text(
-            "Wrong PIN!",
-          ),
-          visible: hasError,
-        ),
-      ],
-    );
+    return 
   }
 
   @override

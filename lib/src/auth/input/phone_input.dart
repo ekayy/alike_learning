@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 class PhoneInput extends StatelessWidget {
   final TextAlign textAlign;
@@ -8,11 +9,12 @@ class PhoneInput extends StatelessWidget {
   final TextEditingController controller;
 
   const PhoneInput({
+    Key key,
     this.textAlign,
     @required this.keyboardType,
     @required this.onPress,
     @required this.controller,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +44,14 @@ class PhoneInput extends StatelessWidget {
             contentPadding:
                 const EdgeInsets.only(left: 15, bottom: 20, top: 20, right: 15),
           ),
-          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-          maxLength: 10,
+          inputFormatters: [
+            MaskedInputFormater('(###) ###-####'),
+          ],
           validator: (String value) {
             if (value.isEmpty) {
               return 'Phone number is required.';
             }
-            if (value.length < 10) {
+            if (value.length < 14) {
               return 'Phone number too short.';
             }
             return null;
