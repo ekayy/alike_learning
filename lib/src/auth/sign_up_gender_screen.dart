@@ -8,7 +8,28 @@ class SignUpGenderScreen extends StatefulWidget {
 }
 
 class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
-  List<bool> isSelected = [false, false, false];
+  List<String> buttonOptions = ['Woman', 'Man', 'Non-binary'];
+  List<bool> toggled = List<bool>.filled(3, false);
+
+  List<Widget> _buildButtons() {
+    return List.generate(toggled.length, (int index) {
+      return Column(
+        children: <Widget>[
+          const SizedBox(height: 25),
+          Button(
+            secondary: !toggled[index],
+            text: buttonOptions[index],
+            onPress: () {
+              setState(() {
+                toggled = List<bool>.filled(toggled.length, false);
+                toggled[index] = !toggled[index];
+              });
+            },
+          )
+        ],
+      );
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +42,8 @@ class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
             Column(
               children: <Widget>[
                 Text('I am a', style: TextStyle(fontSize: 32)),
-                const SizedBox(height: 50),
-                Button(
-                  secondary: true,
-                  text: 'Woman',
-                  onPress: () {},
-                ),
-                const SizedBox(height: 20),
-                Button(
-                  secondary: true,
-                  text: 'Man',
-                  onPress: () {},
-                ),
-                const SizedBox(height: 20),
-                Button(
-                  secondary: true,
-                  text: 'Non-binary',
-                  onPress: () {},
-                ),
+                const SizedBox(height: 25),
+                ..._buildButtons(),
               ],
             ),
             Button(
