@@ -11,7 +11,7 @@ class SignUpEmailScreen extends StatefulWidget {
 
 class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
   final _emailController = TextEditingController();
-  bool isEmailValid = false;
+  final _emailFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +27,28 @@ class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            AlikeTextInput(
-              controller: _emailController,
-              hintText: 'Email',
-              autocorrect: false,
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Email address is required.';
-                }
-                if (!EmailValidator.validate(_emailController.text)) {
-                  return 'Email address is invalid.';
-                }
-                return null;
-              },
+            Form(
+              key: _emailFormKey,
+              child: AlikeTextInput(
+                controller: _emailController,
+                hintText: 'Email',
+                autocorrect: false,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Email address is required.';
+                  }
+                  if (!EmailValidator.validate(_emailController.text)) {
+                    return 'Email address is invalid.';
+                  }
+                  return null;
+                },
+              ),
             ),
             const SizedBox(height: 40),
             Button(
               text: 'Next',
               onPress: () {
-                if (EmailValidator.validate(_emailController.text)) {
+                if (_emailFormKey.currentState.validate()) {
                   Navigator.pushNamed(context, '/signUpName');
                 }
               },
