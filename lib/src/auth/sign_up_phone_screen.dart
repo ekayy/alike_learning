@@ -19,7 +19,6 @@ class SignUpPhoneScreen extends StatefulWidget {
 class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = TextEditingController();
-  // final _pinController = TextEditingController();
   final _phoneFormKey = GlobalKey<FormState>();
 
   bool showPicker = false;
@@ -59,16 +58,6 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
       ),
     );
   }
-
-  // Widget pinInput() {
-  //   return PinInput(
-  //     controller: _pinController,
-  //     hasError: hasError,
-  //     onDone: (text) {
-  //       setState(() => pinEntered = true);
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {

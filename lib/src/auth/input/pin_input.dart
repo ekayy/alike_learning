@@ -41,7 +41,7 @@ class PinInput extends StatelessWidget {
               highlightColor: Colors.transparent,
               defaultBorderColor: Colors.transparent,
               hasTextBorderColor: Colors.transparent,
-              maxLength: 4,
+              maxLength: 6,
               hasError: hasError,
               onTextChanged: this.onTextChanged,
               onDone: this.onDone,
