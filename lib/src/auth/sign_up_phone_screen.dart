@@ -1,10 +1,15 @@
 import 'package:alike_learning/src/auth/input/country_code_input.dart';
 import 'package:alike_learning/src/auth/input/phone_input.dart';
-import 'package:alike_learning/src/auth/input/pin_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alike_learning/src/common/button.dart';
 import 'package:flutter/services.dart';
+
+class SignUpPhoneScreenArguments {
+  final String phoneNumber;
+
+  SignUpPhoneScreenArguments(this.phoneNumber);
+}
 
 class SignUpPhoneScreen extends StatefulWidget {
   @override
@@ -14,14 +19,10 @@ class SignUpPhoneScreen extends StatefulWidget {
 class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = TextEditingController();
-  final _pinController = TextEditingController();
+  // final _pinController = TextEditingController();
   final _phoneFormKey = GlobalKey<FormState>();
 
   bool showPicker = false;
-  bool showVerification = false;
-  bool hasError = false;
-  bool pinEntered = false;
-  String phoneNumber;
 
   List<String> countryCodes = ['US +1', 'UK +44', 'AUS +61'];
 
@@ -59,14 +60,15 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
     );
   }
 
-  Widget pinInput() {
-    return PinInput(
-        controller: _pinController,
-        hasError: hasError,
-        onDone: (text) {
-          setState(() => pinEntered = true);
-        });
-  }
+  // Widget pinInput() {
+  //   return PinInput(
+  //     controller: _pinController,
+  //     hasError: hasError,
+  //     onDone: (text) {
+  //       setState(() => pinEntered = true);
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -79,76 +81,44 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
               children: [
                 const SizedBox(height: 40),
                 Text(
-                    (!showVerification
-                        ? 'Let\'s get started'
-                        : 'Check your phone'),
-                    style: const TextStyle(
-                      fontSize: 26,
-                    )),
+                  'Let\'s get started',
+                  style: const TextStyle(
+                    fontSize: 26,
+                  ),
+                ),
                 const SizedBox(height: 10),
                 Text(
-                  (!showVerification
-                      ? 'enter your phone number'
-                      : 'A four digit code was sent to'),
+                  'enter your phone number',
                   style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
-                (!showVerification
-                    ? const SizedBox(height: 40)
-                    : Column(
-                        children: <Widget>[
-                          const SizedBox(height: 10),
-                          Text(
-                            '${_phoneIsoController.text} ${_phoneController.text}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 30),
-                        ],
-                      )),
-                (!showVerification ? (phoneInput()) : pinInput()),
                 const SizedBox(height: 40),
-                (!showVerification
-                    ? (Button(
-                        text: (!showVerification ? 'Send text' : 'Confirm'),
-                        onPress: () {
-                          RegExp numberRegex = RegExp(r'[^0-9]');
-
-                          // get full phone number
-                          setState(() => phoneNumber =
-                              (_phoneIsoController.text + _phoneController.text)
-                                  .replaceAll(numberRegex, ''));
-
-                          // send SMS code and show PIN field
-                          if (_phoneFormKey.currentState.validate()) {
-                            setState(() => showVerification = true);
-                          }
-                        }))
-                    : (Button(
-                        text: 'Confirm',
-                        isButtonDisabled: !pinEntered,
-                        onPress: () {
-                          // Need to show error if pin invalid
-                          Navigator.pushNamed(context, '/signUpEmail');
-                        }))),
+                phoneInput(),
+                const SizedBox(height: 30),
+                Button(
+                  text: 'Send Text',
+                  onPress: () {
+                    // send SMS code and show PIN field
+                    if (_phoneFormKey.currentState.validate()) {
+                      Navigator.pushNamed(
+                        context,
+                        '/signUpPin',
+                        arguments: SignUpPhoneScreenArguments(
+                          '${_phoneIsoController.text} ${_phoneController.text}',
+                        ),
+                      );
+                    }
+                  },
+                ),
                 const SizedBox(height: 20),
-                (!showVerification
-                    ? Text(
-                        'Receive phone call instead',
-                        style: const TextStyle(
-                          color: Color(0xFF262854),
-                          fontSize: 18,
-                        ),
-                      )
-                    : Text(
-                        'Try another option',
-                        style: const TextStyle(
-                          color: Color(0xFF262854),
-                          fontSize: 18,
-                        ),
-                      )),
+                Text(
+                  'Receive phone call instead',
+                  style: const TextStyle(
+                    color: Color(0xFF262854),
+                    fontSize: 18,
+                  ),
+                ),
               ],
             ),
             if (showPicker)
@@ -181,7 +151,7 @@ class _SignUpPhoneScreenState extends State<SignUpPhoneScreen> {
   void dispose() {
     _phoneIsoController?.dispose();
     _phoneController?.dispose();
-    _pinController?.dispose();
+    // _pinController?.dispose();
     super.dispose();
   }
 }

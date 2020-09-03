@@ -6,11 +6,13 @@ class PinInput extends StatelessWidget {
   final bool hasError;
   final TextEditingController controller;
   final Function(String text) onDone;
+  final Function(String text) onTextChanged;
 
   const PinInput({
     Key key,
     this.hasError,
     this.onDone,
+    this.onTextChanged,
     @required this.controller,
   }) : super(key: key);
 
@@ -41,7 +43,7 @@ class PinInput extends StatelessWidget {
               hasTextBorderColor: Colors.transparent,
               maxLength: 4,
               hasError: hasError,
-              onTextChanged: (text) {},
+              onTextChanged: this.onTextChanged,
               onDone: this.onDone,
               pinBoxWidth: 40,
               pinBoxHeight: 40,
