@@ -1,10 +1,11 @@
-import 'package:alike_learning/src/auth/sign_up_birthday_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_email_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_gender_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_name_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_phone_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_pin_screen.dart';
-import 'package:alike_learning/src/auth/sign_up_splash_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_birthday_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_email_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_gender_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_name_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_pin_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_splash_screen.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

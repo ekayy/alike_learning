@@ -20,21 +20,20 @@ class Button extends StatelessWidget {
       width: 280,
       height: 50,
       child: FlatButton(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Color(0xFF262854)),
+          borderRadius: BorderRadius.circular(28.5),
+        ),
+        color: secondary ? Colors.white : const Color(0xFF262854),
+        textColor: secondary ? Colors.black : Colors.white,
+        onPressed: () => isButtonDisabled ? null : onPress,
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             letterSpacing: 0.45,
           ),
         ),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-              color: Color(0xFF262854), width: 1, style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(28.5),
-        ),
-        color: secondary ? Colors.white : Color(0xFF262854),
-        textColor: secondary ? Colors.black : Colors.white,
-        onPressed: isButtonDisabled ? null : this.onPress,
       ),
     );
   }

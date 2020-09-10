@@ -1,8 +1,8 @@
-import 'package:alike_learning/src/auth/input/pin_input.dart';
-import 'package:alike_learning/src/auth/sign_up_phone_screen.dart';
+import 'package:alike_learning/presentation/auth/input/pin_input.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:alike_learning/src/common/button.dart';
+import 'package:alike_learning/presentation/common/button.dart';;
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPinScreen extends StatefulWidget {

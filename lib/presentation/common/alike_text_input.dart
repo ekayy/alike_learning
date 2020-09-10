@@ -5,7 +5,7 @@ class AlikeTextInput extends StatelessWidget {
   final TextEditingController controller;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter> inputFormatters;
-  final Function(String value) validator;
+  final String Function(String value) validator;
   final Function() onTap;
   final bool autocorrect;
   final TextInputType keyboardType;
@@ -45,35 +45,20 @@ class AlikeTextInput extends StatelessWidget {
         readOnly: readOnly,
         showCursor: showCursor,
         textAlign: textAlign,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
         ),
         decoration: InputDecoration(
-          hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+          hintStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
           hintText: hintText,
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: const Color(0xFF000000),
-            ),
-          ),
-          border: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: const Color(0xFF000000),
-            ),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: const Color(0xFF000000),
-            ),
-          ),
-          contentPadding: EdgeInsets.symmetric(
+          enabledBorder: const UnderlineInputBorder(),
+          border: const UnderlineInputBorder(),
+          focusedBorder: const UnderlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
           ),
         ),
-        onTap: this.onTap,
+        onTap: onTap,
       ),
     );
   }
