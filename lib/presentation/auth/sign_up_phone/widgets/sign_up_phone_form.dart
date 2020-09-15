@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:alike_learning/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:alike_learning/presentation/auth/sign_up_phone/widgets/input/country_code_input.dart';
-import 'package:alike_learning/presentation/auth/sign_up_phone/widgets/input/phone_input.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone/widgets/country_code_input.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone/widgets/phone_input.dart';
 import 'package:alike_learning/presentation/common/button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,7 +57,7 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
               validator: (_) =>
                   context.bloc<SignUpFormBloc>().state.phoneNumber.value.fold(
                         (f) => f.maybeMap(
-                          // invalidPhoneNumber: () => 'Invalid Phone Number',
+                          invalidPhoneNumber: () => 'Invalid Phone Number',
                           orElse: () => null,
                         ),
                         (_) => null,
@@ -173,10 +173,10 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
     );
   }
 
-  @override
-  void dispose() {
-    _phoneIsoController?.dispose();
-    _phoneController?.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _phoneIsoController?.dispose();
+  //   _phoneController?.dispose();
+  //   super.dispose();
+  // }
 }

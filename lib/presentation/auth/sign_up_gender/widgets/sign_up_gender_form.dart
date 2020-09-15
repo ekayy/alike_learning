@@ -2,12 +2,12 @@ import 'package:alike_learning/presentation/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpGenderScreen extends StatefulWidget {
+class SignUpGenderForm extends StatefulWidget {
   @override
-  _SignUpGenderScreenState createState() => _SignUpGenderScreenState();
+  _SignUpGenderFormState createState() => _SignUpGenderFormState();
 }
 
-class _SignUpGenderScreenState extends State<SignUpGenderScreen> {
+class _SignUpGenderFormState extends State<SignUpGenderForm> {
   List<String> buttonOptions = ['Woman', 'Man', 'Non-binary'];
   List<bool> toggled = List<bool>.filled(3, false);
 

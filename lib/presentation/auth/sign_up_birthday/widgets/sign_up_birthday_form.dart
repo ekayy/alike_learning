@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class SignUpBirthdayScreen extends StatefulWidget {
+class SignUpBirthdayForm extends StatefulWidget {
   @override
-  _SignUpBirthdayScreenState createState() => _SignUpBirthdayScreenState();
+  _SignUpBirthdayFormState createState() => _SignUpBirthdayFormState();
 }
 
-class _SignUpBirthdayScreenState extends State<SignUpBirthdayScreen> {
+class _SignUpBirthdayFormState extends State<SignUpBirthdayForm> {
   final _birthdayFormKey = GlobalKey<FormState>();
   final _dateController = TextEditingController();
 

@@ -2,10 +2,16 @@ import 'package:alike_learning/presentation/common/alike_text_input.dart';
 import 'package:alike_learning/presentation/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:email_validator/email_validator.dart';
 
-class SignUpNameScreen extends StatelessWidget {
-  final _nameFormKey = GlobalKey<FormState>();
+class SignUpEmailForm extends StatefulWidget {
+  @override
+  _SignUpEmailFormState createState() => _SignUpEmailFormState();
+}
+
+class _SignUpEmailFormState extends State<SignUpEmailForm> {
+  final _emailController = TextEditingController();
+  final _emailFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,45 +22,34 @@ class SignUpNameScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50),
           children: <Widget>[
             Text(
-              'Your name',
+              'Create your account',
               style: const TextStyle(fontSize: 28, color: Color(0xFF1B1B1B)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
             Form(
-              key: _nameFormKey,
+              key: _emailFormKey,
               child: AlikeTextInput(
-                textCapitalization: TextCapitalization.words,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(50),
-                ],
+                controller: _emailController,
+                hintText: 'Email',
+                autocorrect: false,
                 validator: (String value) {
                   if (value.isEmpty) {
-                    return 'Name is required.';
+                    return 'Email address is required.';
                   }
-                  if (value.length < 3) {
-                    return 'Name is too short.';
+                  if (!EmailValidator.validate(_emailController.text)) {
+                    return 'Email address is invalid.';
                   }
                   return null;
                 },
-                hintText: 'Name',
               ),
             ),
-            Text(
-              'This cannot be changed later',
-              style: const TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 12,
-                color: Color(0xFF1B1B1B),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 40),
             Button(
               text: 'Next',
               onPress: () {
-                if (_nameFormKey.currentState.validate()) {
-                  Navigator.pushNamed(context, '/signUpBirthday');
+                if (_emailFormKey.currentState.validate()) {
+                  Navigator.pushNamed(context, '/signUpName');
                 }
               },
             ),
@@ -62,5 +57,10 @@ class SignUpNameScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 }

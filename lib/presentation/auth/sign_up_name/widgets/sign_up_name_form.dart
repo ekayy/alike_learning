@@ -2,16 +2,10 @@ import 'package:alike_learning/presentation/common/alike_text_input.dart';
 import 'package:alike_learning/presentation/common/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:flutter/services.dart';
 
-class SignUpEmailScreen extends StatefulWidget {
-  @override
-  _SignUpEmailScreenState createState() => _SignUpEmailScreenState();
-}
-
-class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
-  final _emailController = TextEditingController();
-  final _emailFormKey = GlobalKey<FormState>();
+class SignUpNameForm extends StatelessWidget {
+  final _nameFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,34 +16,45 @@ class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50),
           children: <Widget>[
             Text(
-              'Create your account',
+              'Your name',
               style: const TextStyle(fontSize: 28, color: Color(0xFF1B1B1B)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
             Form(
-              key: _emailFormKey,
+              key: _nameFormKey,
               child: AlikeTextInput(
-                controller: _emailController,
-                hintText: 'Email',
-                autocorrect: false,
+                textCapitalization: TextCapitalization.words,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(50),
+                ],
                 validator: (String value) {
                   if (value.isEmpty) {
-                    return 'Email address is required.';
+                    return 'Name is required.';
                   }
-                  if (!EmailValidator.validate(_emailController.text)) {
-                    return 'Email address is invalid.';
+                  if (value.length < 3) {
+                    return 'Name is too short.';
                   }
                   return null;
                 },
+                hintText: 'Name',
               ),
             ),
-            const SizedBox(height: 40),
+            Text(
+              'This cannot be changed later',
+              style: const TextStyle(
+                fontWeight: FontWeight.w200,
+                fontSize: 12,
+                color: Color(0xFF1B1B1B),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 25),
             Button(
               text: 'Next',
               onPress: () {
-                if (_emailFormKey.currentState.validate()) {
-                  Navigator.pushNamed(context, '/signUpName');
+                if (_nameFormKey.currentState.validate()) {
+                  Navigator.pushNamed(context, '/signUpBirthday');
                 }
               },
             ),
@@ -57,10 +62,5 @@ class _SignUpEmailScreenState extends State<SignUpEmailScreen> {
         ),
       ),
     );
-  }
-
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
   }
 }
