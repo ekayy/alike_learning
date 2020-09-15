@@ -16,12 +16,11 @@ class CountryCodeInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: Container(
         padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
-            top: const BorderSide(width: 1, color: Color(0xFF979797)),
+            top: BorderSide(color: Color(0xFF979797)),
           ),
         ),
         child: TextFormField(
@@ -30,20 +29,19 @@ class CountryCodeInput extends StatelessWidget {
           readOnly: true,
           showCursor: false,
           textAlign: textAlign,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: UnderlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: const Color(0xFF979797),
+              borderSide: BorderSide(
+                color: Color(0xFF979797),
               ),
             ),
             contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
+                EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
           ),
           style: const TextStyle(
             fontSize: 22.0,
           ),
-          onTap: this.onPress,
+          onTap: () => onPress,
         ),
       ),
     );

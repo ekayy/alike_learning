@@ -4,14 +4,18 @@ import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 class PhoneInput extends StatelessWidget {
   final TextAlign textAlign;
+  final String Function(String) validator;
   final TextInputType keyboardType;
-  final Function onPress;
+  final void Function(String) onChanged;
+  final void Function() onPress;
   final TextEditingController controller;
 
   const PhoneInput({
     Key key,
     this.textAlign,
+    this.validator,
     @required this.keyboardType,
+    @required this.onChanged,
     @required this.onPress,
     @required this.controller,
   }) : super(key: key);
@@ -22,10 +26,9 @@ class PhoneInput extends StatelessWidget {
       flex: 2,
       child: Container(
         padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
-            top: const BorderSide(
-              width: 1,
+            top: BorderSide(
               color: Color(0xFF979797),
             ),
           ),
@@ -34,33 +37,34 @@ class PhoneInput extends StatelessWidget {
           keyboardType: keyboardType,
           controller: controller,
           autofocus: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '(510) 555-5555',
-            focusedBorder: const UnderlineInputBorder(
+            focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                width: 1,
-                color: const Color(0xFF979797),
+                color: Color(0xFF979797),
               ),
             ),
             contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
+                EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
           ),
           inputFormatters: [
             MaskedInputFormater('(###) ###-####'),
           ],
-          validator: (String value) {
-            if (value.isEmpty) {
-              return 'Phone number is required.';
-            }
-            if (value.length < 14) {
-              return 'Phone number too short.';
-            }
-            return null;
-          },
+          validator: validator,
+          // validator: (String value) {
+          //   if (value.isEmpty) {
+          //     return 'Phone number is required.';
+          //   }
+          //   if (value.length < 14) {
+          //     return 'Phone number too short.';
+          //   }
+          //   return null;
+          // },
           style: const TextStyle(
             fontSize: 22.0,
           ),
-          onTap: this.onPress,
+          onChanged: onChanged,
+          onTap: onPress,
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String text;
   final bool secondary;
-  final Function onPress;
+  final void Function() onPress;
   final bool isButtonDisabled;
 
   const Button({
@@ -26,7 +26,7 @@ class Button extends StatelessWidget {
         ),
         color: secondary ? Colors.white : const Color(0xFF262854),
         textColor: secondary ? Colors.black : Colors.white,
-        onPressed: () => isButtonDisabled ? null : onPress,
+        onPressed: isButtonDisabled ? null : onPress,
         child: Text(
           text,
           style: const TextStyle(

@@ -1,9 +1,8 @@
-import 'package:alike_learning/presentation/auth/input/pin_input.dart';
-import 'package:alike_learning/presentation/auth/sign_up_phone_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone/sign_up_phone_screen.dart';
+import 'package:alike_learning/presentation/auth/sign_up_phone/widgets/input/pin_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:alike_learning/presentation/common/button.dart';;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:alike_learning/presentation/common/button.dart';
 
 class SignUpPinScreen extends StatefulWidget {
   @override
@@ -20,42 +19,42 @@ class _SignUpPinScreenState extends State<SignUpPinScreen> {
 
   List<String> countryCodes = ['US +1', 'UK +44', 'AUS +61'];
 
-  Future _verifyPhoneNumber() async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
+  // Future _verifyPhoneNumber() async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        timeout: const Duration(seconds: 5),
-        verificationCompleted: (AuthCredential authCredential) async {
-          // automatic SMS resolution (only android)
-          await _auth.signInWithCredential(authCredential);
-          Navigator.pushNamed(context, '/signUpEmail');
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          print('The provided phone number is not valid.');
-        },
-        codeSent: (String verificationId, [int forceResendingToken]) async {
-          // Update the UI - wait for the user to enter the SMS code
-          String smsCode = pinValue;
+  //   try {
+  //     await _auth.verifyPhoneNumber(
+  //       phoneNumber: phoneNumber,
+  //       timeout: const Duration(seconds: 5),
+  //       verificationCompleted: (PhoneAuthCredential authCredential) async {
+  //         // automatic SMS resolution (only android)
+  //         await _auth.signInWithCredential(authCredential);
+  //         Navigator.pushNamed(context, '/signUpEmail');
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         print('The provided phone number is not valid.');
+  //       },
+  //       codeSent: (String verificationId, [int forceResendingToken]) async {
+  //         // Update the UI - wait for the user to enter the SMS code
+  //         String smsCode = pinValue;
 
-          // Create a PhoneAuthCredential with the code
-          PhoneAuthCredential _credential = PhoneAuthProvider.credential(
-              verificationId: verificationId, smsCode: smsCode);
+  //         // Create a PhoneAuthCredential with the code
+  //         PhoneAuthCredential _credential = PhoneAuthProvider.credential(
+  //             verificationId: verificationId, smsCode: smsCode);
 
-          // Sign the user in (or link) with the credential
-          UserCredential result = await _auth.signInWithCredential(_credential);
-          User user = result.user;
-          if (user != null) {
-            Navigator.pushNamed(context, '/signUpEmail');
-          }
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
-    } catch (e) {
-      print('failed verication $e');
-    }
-  }
+  //         // Sign the user in (or link) with the credential
+  //         UserCredential result = await _auth.signInWithCredential(_credential);
+  //         User user = result.user;
+  //         if (user != null) {
+  //           Navigator.pushNamed(context, '/signUpEmail');
+  //         }
+  //       },
+  //       codeAutoRetrievalTimeout: (String verificationId) {},
+  //     );
+  //   } catch (e) {
+  //     print('failed verication $e');
+  //   }
+  // }
 
   Widget pinInput() {
     return PinInput(
@@ -87,16 +86,16 @@ class _SignUpPinScreenState extends State<SignUpPinScreen> {
             Column(
               children: [
                 const SizedBox(height: 40),
-                Text(
+                const Text(
                   'Check your phone',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 26,
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                const Text(
                   'A four digit code was sent to',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
@@ -114,18 +113,18 @@ class _SignUpPinScreenState extends State<SignUpPinScreen> {
                   text: 'Confirm',
                   isButtonDisabled: !pinEntered,
                   onPress: () {
-                    RegExp numberRegex = RegExp(r'[^0-9|+]');
+                    final RegExp phoneNumberRegex = RegExp(r'[^0-9|+]');
 
                     setState(() => phoneNumber =
-                        (args.phoneNumber).replaceAll(numberRegex, ''));
+                        (args.phoneNumber).replaceAll(phoneNumberRegex, ''));
 
-                    _verifyPhoneNumber();
+                    // _verifyPhoneNumber();
                   },
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'Try another option',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Color(0xFF262854),
                     fontSize: 18,
                   ),

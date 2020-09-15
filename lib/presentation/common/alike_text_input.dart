@@ -6,7 +6,7 @@ class AlikeTextInput extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter> inputFormatters;
   final String Function(String value) validator;
-  final Function() onTap;
+  final void Function() onTap;
   final bool autocorrect;
   final TextInputType keyboardType;
   final String hintText;

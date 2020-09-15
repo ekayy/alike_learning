@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 
 class PinInput extends StatelessWidget {
@@ -22,10 +21,10 @@ class PinInput extends StatelessWidget {
       children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(
-                color: const Color(0xFF979797),
+                color: Color(0xFF979797),
               ),
             ),
           ),
@@ -43,19 +42,19 @@ class PinInput extends StatelessWidget {
               hasTextBorderColor: Colors.transparent,
               maxLength: 6,
               hasError: hasError,
-              onTextChanged: this.onTextChanged,
-              onDone: this.onDone,
+              onTextChanged: onTextChanged,
+              onDone: onDone,
               pinBoxWidth: 40,
               pinBoxHeight: 40,
               pinBoxRadius: 40,
               wrapAlignment: WrapAlignment.spaceAround,
               pinBoxDecoration:
                   ProvidedPinBoxDecoration.defaultPinBoxDecoration,
-              pinTextStyle: TextStyle(fontSize: 18.0),
+              pinTextStyle: const TextStyle(fontSize: 18.0),
               pinTextAnimatedSwitcherTransition:
                   ProvidedPinBoxTextAnimation.scalingTransition,
-              pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
-              keyboardType: TextInputType.number,
+              pinTextAnimatedSwitcherDuration:
+                  const Duration(milliseconds: 300),
             ),
           ),
         ),
