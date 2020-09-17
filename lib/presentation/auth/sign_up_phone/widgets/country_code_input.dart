@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CountryCodeInput extends StatelessWidget {
   final TextAlign textAlign;
   final TextInputType keyboardType;
-  final Function onPress;
+  final void Function() onPress;
   final TextEditingController controller;
 
   const CountryCodeInput({
@@ -41,7 +41,7 @@ class CountryCodeInput extends StatelessWidget {
           style: const TextStyle(
             fontSize: 22.0,
           ),
-          onTap: () => onPress,
+          onTap: onPress,
         ),
       ),
     );

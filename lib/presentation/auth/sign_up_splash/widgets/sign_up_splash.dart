@@ -31,7 +31,6 @@ class SignUpSplash extends StatelessWidget {
                   Button(
                     text: 'Sign Up',
                     onPress: () {
-                      // Navigator.pushNamed(context, '/signUpPhone');
                       ExtendedNavigator.of(context)
                           .push(Routes.signUpPhoneScreen);
                     },

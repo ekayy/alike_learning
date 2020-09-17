@@ -1,3 +1,5 @@
+import 'package:alike_learning/presentation/router/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,15 +23,16 @@ class SignUpPhoneForm extends StatefulWidget {
 class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
   final _phoneIsoController = TextEditingController(text: 'US +1');
   final _phoneController = TextEditingController();
-  final _phoneFormKey = GlobalKey<FormState>();
+  // final _phoneFormKey = GlobalKey<FormState>();
 
   bool showPicker = false;
 
   List<String> countryCodes = ['US +1', 'UK +44', 'AUS +61'];
 
-  Widget phoneInput(BuildContext context) {
+  Widget phoneInput(BuildContext context, SignUpFormState state) {
     return Form(
-      key: _phoneFormKey,
+      autovalidate: state.showErrorMessages,
+      // key: _phoneFormKey,
       child: Container(
         height: 90,
         child: Row(
@@ -57,7 +60,7 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
               validator: (_) =>
                   context.bloc<SignUpFormBloc>().state.phoneNumber.value.fold(
                         (f) => f.maybeMap(
-                          invalidPhoneNumber: () => 'Invalid Phone Number',
+                          invalidPhoneNumber: (_) => 'Invalid Phone Number',
                           orElse: () => null,
                         ),
                         (_) => null,
@@ -74,26 +77,26 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpFormBloc, SignUpFormState>(
-      listener: (context, state) {
-        state.authFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              // FlushbarHelper.createError(
-              //   message: failure.map(
-              //     cancelledByUser: (_) => 'Cancelled',
-              //     serverError: (_) => 'Server error',
-              //     emailAlreadyInUse: (_) => 'Email already in use',
-              //     invalidEmailAndPasswordCombination: (_) =>
-              //         'Invalid email and password combination',
-              //   ),
-              // ).show(context);
-            },
-            (_) {},
-          ),
-        );
-      },
+    return BlocBuilder<SignUpFormBloc, SignUpFormState>(
+      // listener: (context, state) {
+      //   state.authFailureOrSuccessOption.fold(
+      //     () {},
+      //     (either) => either.fold(
+      //       (failure) {
+      //         FlushbarHelper.createError(
+      //           message: failure.map(
+      //             cancelledByUser: (_) => 'Cancelled',
+      //             serverError: (_) => 'Server error',
+      //             invalidPhoneNumber: (_) => 'Invalid phone number',
+      //           ),
+      //         ).show(context);
+      //       },
+      //       (_) {
+
+      //       },
+      //     ),
+      //   );
+      // },
       builder: (BuildContext context, state) {
         return Center(
           child: ListView(
@@ -115,7 +118,7 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  phoneInput(context),
+                  phoneInput(context, state),
                   const SizedBox(height: 30),
                   Button(
                     text: 'Send Text',
@@ -125,15 +128,12 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
                           .bloc<SignUpFormBloc>()
                           .add(const SignUpFormEvent.phoneNumberPressed());
 
-                      // if (_phoneFormKey.currentState.validate()) {
-                      //   Navigator.pushNamed(
-                      //     context,
-                      //     '/signUpPin',
-                      //     arguments: SignUpPhoneScreenArguments(
-                      //       '${_phoneIsoController.text} ${_phoneController.text}',
-                      //     ),
-                      //   );
-                      // }
+                      ExtendedNavigator.of(context).push(
+                        Routes.signUpPinScreen,
+                        arguments: SignUpPhoneFormArguments(
+                          '${_phoneIsoController.text} ${_phoneController.text}',
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(height: 20),
@@ -150,7 +150,7 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    height: 200,
+                    height: 160,
                     child: CupertinoPicker(
                       itemExtent: 80,
                       onSelectedItemChanged: (int index) {
@@ -173,10 +173,10 @@ class _SignUpPhoneFormState extends State<SignUpPhoneForm> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _phoneIsoController?.dispose();
-  //   _phoneController?.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _phoneIsoController?.dispose();
+    _phoneController?.dispose();
+    super.dispose();
+  }
 }
